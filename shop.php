@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
- 
+   
  <div id="navbar" class="navbar navbar-default"><!-- navbar navbar-default Begin -->
        
        <div class="container"><!-- container Begin -->
@@ -77,8 +77,8 @@
                    
                    <i class="fa fa-shopping-cart"></i>
                    
-                  <?php
-				  include("db.php");
+           <?php
+		   include("db.php");
 				   if ( isset($_COOKIE['idu']) ) {
 					   $idu=$_COOKIE['idu'];
 					   $link=connect();
@@ -135,132 +135,45 @@
            
        </div><!-- container Finish -->
        
-   </div><!-- navbar navbar-default Finish -->
- 
- <div class="container" id="slider"><!-- container Begin -->
+   </div><!-- navbar navbar-default Finish -->    
        
-       <div class="col-md-12"><!-- col-12 Begin -->
-           
-           <div class="carousel slide" id="myCarousel" data-ride="carousel"><!-- carousel slide Begin -->
-               
-               <ol class="carousel-indicators"><!-- carousel-indicators Begin -->
-                   
-                   <li class="active" data-target="#myCarousel" data-slide-to="0"></li>
-                   <li data-target="#myCarousel" data-slide-to="1"></li>
-                   <li data-target="#myCarousel" data-slide-to="2"></li>
-                   <li data-target="#myCarousel" data-slide-to="3"></li>
-                   
-               </ol><!-- carousel-indicators Finish -->
-               
-               <div class="carousel-inner"><!-- carousel-inner Begin -->
-                   
-                   <div class="item active">
-                       
-                       <img src="admin_area/slides_images/slide-1.png" alt="Slider Image 1">
-                       
-                   </div>
-                   
-                   <div class="item">
-                       
-                       <img src="admin_area/slides_images/slide-2.png" alt="Slider Image 2">
-                       
-                   </div>
-                   
-                   <div class="item">
-                       
-                       <img src="admin_area/slides_images/slide-3.png" alt="Slider Image 3">
-                       
-                   </div>
-                   
-                   <div class="item">
-                       
-                       <img src="admin_area/slides_images/slide-4.png" alt="Slider Image 4">
-                       
-                   </div>
-                   
-               </div><!-- carousel-inner Finish -->
-               
-               <a href="#myCarousel" class="left carousel-control" data-slide="prev"><!-- left carousel-control Begin -->
-                   
-                   <span class="glyphicon glyphicon-chevron-left"></span>
-                   <span class="sr-only">Previous</span>
-                   
-               </a><!-- left carousel-control Finish -->
-               
-               <a href="#myCarousel" class="right carousel-control" data-slide="next"><!-- left carousel-control Begin -->
-                   
-                   <span class="glyphicon glyphicon-chevron-right"></span>
-                   <span class="sr-only">Next</span>
-                   
-               </a><!-- left carousel-control Finish -->
-               
-           </div><!-- carousel slide Finish -->
-           
-       </div><!-- col-12 Finish -->
-       
-   </div><!-- container Finish -->
- 
- <div id="advantages">
-	<div class="container">
-	<div class="same-height-row">
-	<div class="col-sm-4">
-	<div class="box same-height">
-	<div class="icon">
-	<i class="fa fa-heart"></i>
-	</div>
-	<h3><a href="#">We Love Our Costumer</a></h3>
-	<p>We know to provide the best possible service ever</p>
-	</div>
-	</div>
-	<div class="col-sm-4">
-	<div class="box same-height">
-	<div class="icon">
-	<i class="fa fa-tag"></i>
-	</div>
-	<h3><a href="#">Best Prices</a></h3>
-	<p>Compare us with another store site, who have the best prices</p>
-	</div>
-	</div>
-	<div class="col-sm-4">
-	<div class="box same-height">
-	<div class="icon">
-	<i class="fa fa-thumbs-up"></i>
-	</div>
-	<h3><a href="#">100% Original Products</a></h3>
-	<p>We just offer you the best and original products</p>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	
-	  <div id="hot"><!-- #hot Begin -->
-       
-       <div class="box"><!-- box Begin -->
-           
-           <div class="container"><!-- container Begin -->
-               
-               <div class="col-md-12"><!-- col-md-12 Begin -->
-                   
-                   <h2>
-                       Our Latest Products
-                   </h2>
-                   
-               </div><!-- col-md-12 Finish -->
-               
-           </div><!-- container Finish -->
-           
-       </div><!-- box Finish -->
-       
-   </div><!-- #hot Finish -->
    
-   <div id="content" class="container"><!-- container Begin -->
-       
-       <div class="row"><!-- row Begin -->
-         
-		 <?php  
-					$link=connect();
-                    $sql=" SELECT * FROM product where p_available='1' ORDER BY id_pro DESC LIMIT 0 , 8;";
+   <div id="content"><!-- #content Begin -->
+       <div class="container"><!-- container Begin -->
+           <div class="col-md-12"><!-- col-md-12 Begin -->
+               
+               <ul class="breadcrumb"><!-- breadcrumb Begin -->
+                   <li>
+                       <a href="index.php">Home</a>
+                   </li>
+                   <li>
+                       Shop
+                   </li>
+               </ul><!-- breadcrumb Finish -->
+               
+           </div><!-- col-md-12 Finish -->
+           
+           <div class="col-md-3"><!-- col-md-3 Begin -->
+   
+   <?php 
+    
+    include("includes/sidebar.php");
+    
+    ?>
+               
+           </div><!-- col-md-3 Finish -->
+           
+           <div class="col-md-9"><!-- col-md-9 Begin -->
+              
+               <div class="row"><!-- row Begin -->
+			  
+			  <?php
+			  
+			   $link=connect();
+			   if (isset($_GET['id_cat'])){
+					
+					$id_cat=$_GET['id_cat'];
+                    $sql="SELECT * FROM product where id_cat='$id_cat' and p_available='1';";
 					$res = mysqli_query($link, $sql);	
 					
 					if(!$res){
@@ -269,8 +182,8 @@
 					
 					elseif(mysqli_num_rows($res)>0){	
 					
-					while ( ($pro = mysqli_fetch_assoc($res)) ) {
-					echo "<div class='col-md-4 col-sm-6 single'> ";
+					while ($pro = mysqli_fetch_assoc($res) ) {
+					echo "<div class='col-md-4 col-sm-6 center-responsive'> ";
 					echo "<div class='product'>";
 					echo "<a href='details.php?id_pro=".$pro['id_pro']."'>";
 					echo "<img class='img-responsive' src='admin_area/product_images/".$pro['p_image']."' alt='".$pro['p_name']."'>";
@@ -286,30 +199,69 @@
 					echo "<a href='validationServer/AddCart.php?id_pro=".$pro['id_pro']."' class='btn btn-primary'>";
 					echo "<i class='fa fa-shopping-cart'>Add To Cart</i></a>";
 					echo "</p> </div> </div> </div>";
-					
 							}
 					
 					}		
 					else{
-					echo"<h1>Products not available.</h1>";
+					echo"<h1>Products not available now for this categorie.</h1>";
 					}
-               
+               }
+			   else{
+					echo"<center><h1>Welcome to our SUPER store, choose any categorie to take a look at our SUPER products.</h1></center>";
+					}
 				mysqli_close($link);
 			   ?>
-			   
+			   <!--
+                   <div class="col-md-4 col-sm-6 center-responsive">
+                       <div class="product">
+                   <a href="details.php">
+                       <img class="img-responsive" src="admin_area/product_images/" alt="">
+                   </a>
+                   <div class="text">
+                       
+                       <h3>
+                           <a href="details.php">
+                              
+                           </a>
+                       </h3>
+                       
+                       <p class="price">$30</p>
+                       
+                       <p class="button">
+                           
+                           <a href="details.php" class="btn btn-default">View Details</a>
+                           
+                           <a href="details.php" class="btn btn-primary">
+                               
+                               <i class="fa fa-shopping-cart">
+                                   Add To Cart
+                               </i>
+                               
+                           </a>
+                           
+                       </p>
+                       
+                   </div>
+                   
+               </div>
+                       
+                   </div>
+				   -->
+                  
+               </div><!-- row Finish -->
+               
+           </div><!-- col-md-9 Finish -->
            
-       </div><!-- row Finish -->
-       
-   </div><!-- container Finish -->
-
-	<?php 
+       </div><!-- container Finish -->
+   </div><!-- #content Finish -->
+   
+   <?php 
     
     include("includes/footer.php");
     
     ?>
     
-   
-	<script src="js/jquery-331.min.js"></script>
+    <script src="js/jquery-331.min.js"></script>
     <script src="js/bootstrap-337.min.js"></script>
     
     
